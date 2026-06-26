@@ -1,0 +1,548 @@
+/* =====================================================================
+   MBC PREMIUM LAYER  (premium.css)  — v2
+   Loads AFTER style.css and progressively enhances the existing markup.
+   Safe to remove: deleting premium.css + premium.js reverts to the
+   original site. No existing class is renamed; nothing is deleted.
+   ===================================================================== */
+
+:root{
+  --gold-2:#e3b94e;
+  --glass:rgba(255,255,255,.72);
+  --glass-solid:rgba(255,255,255,.93);
+  --shadow-1:0 6px 24px rgba(31,56,100,.10);
+  --shadow-2:0 14px 40px rgba(31,56,100,.16);
+}
+
+/* ----------------------------------------------------------------------
+   PHASE 2 — PREMIUM STICKY GLASSMORPHISM NAVBAR
+   ---------------------------------------------------------------------- */
+header.site{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid rgba(31,56,100,.08);
+  transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+header.site .nav{transition:padding .3s ease}
+header.site.mbc-scrolled{
+  background:var(--glass-solid);
+  box-shadow:var(--shadow-1);
+}
+header.site.mbc-scrolled .nav{padding-top:5px;padding-bottom:5px}
+header.site.mbc-scrolled .brand img{height:36px;transition:height .3s ease}
+.brand img{transition:height .3s ease}
+
+/* nav typography + spacing */
+nav .lvl1{gap:2px}
+nav a.navlink{
+  position:relative;
+  letter-spacing:.2px;
+  transition:color .2s ease, background .2s ease;
+}
+nav a.navlink:hover{background:transparent}
+/* animated gold underline */
+nav a.navlink::after{
+  content:"";
+  position:absolute;left:12px;right:12px;bottom:5px;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));
+  border-radius:2px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+nav a.navlink:hover::after,
+nav a.navlink.mbc-active::after{transform:scaleX(1)}
+nav a.navlink.mbc-active{color:var(--navy)}
+/* remove the old inline grey "active" pill look on Home, we use underline */
+nav a.navlink[style*="background"]{background:transparent!important}
+
+/* CTA buttons micro-interaction */
+.navcta .btn,.hero .ctas .btn,.cta .ctas .btn{
+  transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+}
+.navcta .btn:hover,.hero .ctas .btn:hover,.cta .ctas .btn:hover{
+  transform:translateY(-2px);box-shadow:0 8px 20px rgba(31,56,100,.18)
+}
+
+/* ----------------------------------------------------------------------
+   PHASE 6 — MEGA MENU (desktop)
+   JS adds class .mbc-mega to each .dd and rebuilds items as icon+title+desc
+   ---------------------------------------------------------------------- */
+.dd.mbc-mega{
+  min-width:540px;padding:14px;border-radius:14px;
+  box-shadow:var(--shadow-2);
+  display:none;
+  grid-template-columns:1fr 1fr;gap:4px;
+}
+.dd.mbc-mega.mbc-cols-1{grid-template-columns:1fr;min-width:300px}
+nav .lvl1>li:hover .dd.mbc-mega{display:grid;animation:mbcMegaIn .26s ease}
+@keyframes mbcMegaIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mbc-mi{display:flex;gap:11px;align-items:flex-start;padding:10px;border-radius:10px;transition:background .18s ease}
+.mbc-mi:hover{background:var(--soft);text-decoration:none}
+.mbc-mi .mbc-ic{
+  flex:0 0 36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,#fef6e3,#f6e7c2);
+  color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.95rem
+}
+.mbc-mi .mbc-txt{display:flex;flex-direction:column}
+.mbc-mi .mbc-tt{font-weight:700;color:var(--navy);font-size:.9rem;line-height:1.2}
+.mbc-mi .mbc-ds{font-size:.76rem;color:var(--muted);line-height:1.35;margin-top:2px}
+
+/* ----------------------------------------------------------------------
+   PHASE 1 — MOBILE TWO-TAP MENU + smooth accordion (<=900px)
+   First tap opens submenu (li.mbc-open), second tap follows the link.
+   ---------------------------------------------------------------------- */
+@media(max-width:1024px){
+  /* collapse to hamburger from tablet down so the bar never crowds */
+  .hamb{display:block}
+  .navcta .btn-ghost{display:none}
+  header.site .mbc-social-header{display:none}
+  nav .lvl1{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;background:#fff;
+    gap:0;border-radius:0 0 14px 14px;
+    box-shadow:var(--shadow-2);padding:8px 14px 14px;
+    max-height:calc(100vh - 64px);overflow-y:auto;
+  }
+  nav .lvl1.open{display:flex}
+  nav .lvl1>li{width:100%}
+  nav a.navlink{padding:13px 10px;border-bottom:1px solid var(--line);font-size:1rem}
+  nav a.navlink::after{display:none}
+  nav .lvl1>li.mbc-has-sub>a.navlink::before{
+    content:"\f078";font-family:"Font Awesome 6 Free";font-weight:900;
+    float:right;font-size:.7rem;color:var(--gold);margin-top:4px;
+    transition:transform .3s ease
+  }
+  nav .lvl1>li.mbc-open>a.navlink::before{transform:rotate(180deg)}
+  /* collapsed by default, smooth height animation */
+  nav .lvl1>li>.dd{
+    max-height:0;overflow:hidden;
+    transition:max-height .35s ease;
+    margin:0 0 0 8px;border-left:2px solid var(--line);padding:0;
+  }
+  nav .lvl1>li.mbc-open>.dd{max-height:1200px}
+  .dd.mbc-mega{grid-template-columns:1fr;min-width:0;box-shadow:none}
+  .dd.mbc-mega .mbc-mi{padding:9px 8px}
+  .dd.mbc-mega .mbc-ds{display:none}      /* keep mobile menu compact */
+  nav .lvl1>li:hover .dd.mbc-mega{display:block}  /* no hover-open on touch */
+}
+
+/* ----------------------------------------------------------------------
+   PHASE 3 — SOCIAL ICONS (header + footer) + FLOATING CONTACT BAR
+   ---------------------------------------------------------------------- */
+.mbc-social{display:flex;align-items:center;gap:6px}
+.mbc-social a{
+  width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  color:var(--navy);background:var(--soft);font-size:.85rem;
+  transition:transform .2s ease, background .2s ease, color .2s ease
+}
+.mbc-social a:hover{color:#fff;transform:translateY(-2px);text-decoration:none}
+.mbc-social a.fb:hover{background:#1877F2}
+.mbc-social a.ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.mbc-social a.li:hover{background:#0A66C2}
+.mbc-social a.x:hover{background:#000}
+@media(max-width:900px){.mbc-social.mbc-social-header{display:none}}
+
+footer.site .mbc-social-footer{display:flex;gap:10px;margin-top:14px}
+footer.site .mbc-social-footer a{
+  width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.08);color:#fff;font-size:1rem;
+  transition:transform .2s ease, background .2s ease
+}
+footer.site .mbc-social-footer a:hover{transform:translateY(-3px);text-decoration:none}
+footer.site .mbc-social-footer a.fb:hover{background:#1877F2}
+footer.site .mbc-social-footer a.ig:hover{background:#dc2743}
+footer.site .mbc-social-footer a.li:hover{background:#0A66C2}
+footer.site .mbc-social-footer a.x:hover{background:#000}
+
+/* floating contact bar (replaces single WhatsApp bubble) */
+.wafloat{display:none!important}
+.mbc-floatbar{position:fixed;right:16px;bottom:92px;z-index:61;display:flex;flex-direction:column;gap:10px}
+.mbc-floatbar a{
+  width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.15rem;box-shadow:0 6px 18px rgba(0,0,0,.22);
+  transition:transform .2s ease, box-shadow .2s ease
+}
+.mbc-floatbar a:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 10px 24px rgba(0,0,0,.3);text-decoration:none}
+.mbc-floatbar .wa{background:#25D366}
+.mbc-floatbar .fb{background:#1877F2}
+.mbc-floatbar .li{background:#0A66C2}
+.mbc-floatbar .mbc-tip{
+  position:absolute;right:58px;white-space:nowrap;background:#16294a;color:#fff;
+  font-size:.74rem;font-weight:600;padding:5px 9px;border-radius:6px;opacity:0;pointer-events:none;
+  transform:translateX(6px);transition:.2s
+}
+.mbc-floatbar a{position:relative}
+.mbc-floatbar a:hover .mbc-tip{opacity:1;transform:none}
+@media(max-width:900px){.mbc-floatbar{bottom:108px;right:12px}.mbc-floatbar a{width:44px;height:44px}}
+
+/* contact page social block */
+.mbc-contact-social{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px;text-align:center
+}
+.mbc-contact-social h3{margin-bottom:6px}
+.mbc-contact-social p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
+.mbc-contact-social .mbc-social{justify-content:center;gap:12px}
+.mbc-contact-social .mbc-social a{width:46px;height:46px;font-size:1.15rem;border-radius:12px}
+
+/* ----------------------------------------------------------------------
+   PHASE 4 — HOMEPAGE HERO SLIDER
+   ---------------------------------------------------------------------- */
+.mbc-slider{position:relative;overflow:hidden;min-height:540px;background:var(--navy)}
+.mbc-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease;display:flex;align-items:center}
+.mbc-slide.active{opacity:1;visibility:visible}
+.mbc-slide .mbc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06)}
+.mbc-slide.active .mbc-bg{animation:mbcKen 7s ease forwards}
+@keyframes mbcKen{from{transform:scale(1.06)}to{transform:scale(1.14)}}
+.mbc-slide .mbc-ov{position:absolute;inset:0}
+.mbc-slide .mbc-inner{position:relative;z-index:2;max-width:1140px;margin:0 auto;padding:0 24px;width:100%}
+.mbc-slide .mbc-ey{display:inline-block;color:var(--gold-2);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:.8rem;margin-bottom:12px}
+.mbc-slide h1,.mbc-slide h2{color:#fff;font-size:2.7rem;line-height:1.15;max-width:720px;margin-bottom:14px}
+.mbc-slide p{color:#e8eefb;font-size:1.12rem;max-width:620px;margin-bottom:22px}
+.mbc-slide .mbc-cta{display:flex;gap:12px;flex-wrap:wrap}
+.mbc-slide.active .mbc-ey{animation:mbcUp .6s .1s both}
+.mbc-slide.active h1,.mbc-slide.active h2{animation:mbcUp .6s .25s both}
+.mbc-slide.active p{animation:mbcUp .6s .4s both}
+.mbc-slide.active .mbc-cta{animation:mbcUp .6s .55s both}
+@keyframes mbcUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.mbc-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.18);color:#fff;font-size:1rem;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;transition:background .2s ease
+}
+.mbc-arrow:hover{background:rgba(255,255,255,.34)}
+.mbc-arrow.prev{left:18px}.mbc-arrow.next{right:18px}
+.mbc-dots{position:absolute;bottom:20px;left:0;right:0;z-index:5;display:flex;gap:9px;justify-content:center}
+.mbc-dots button{width:11px;height:11px;border-radius:50%;border:0;cursor:pointer;background:rgba(255,255,255,.45);transition:all .2s ease}
+.mbc-dots button.active{background:var(--gold-2);width:26px;border-radius:6px}
+@media(max-width:900px){
+  .mbc-slider{min-height:460px}
+  .mbc-slide h2{font-size:1.9rem}
+  .mbc-slide p{font-size:1rem}
+  .mbc-arrow{width:38px;height:38px}
+}
+
+/* ----------------------------------------------------------------------
+   PHASE 5 — INDUSTRY HERO BANNERS
+   ---------------------------------------------------------------------- */
+.mbc-ind-banner{position:relative;overflow:hidden;color:#fff;padding:64px 0;min-height:300px;display:flex;align-items:center}
+/* full-width industry photo + dark-blue overlay (≈66–72%) for white-text contrast */
+.mbc-ind-banner .mbc-ib-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  animation:mbcFadeImg 1.1s ease both
+}
+.mbc-ind-banner .mbc-ib-ov{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(120deg,rgba(18,34,62,.74),rgba(31,56,100,.66) 60%,rgba(31,56,100,.62))
+}
+@keyframes mbcFadeImg{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:none}}
+.mbc-ind-banner .mbc-ib-inner{position:relative;z-index:2;max-width:1140px;margin:0 auto;padding:0 24px;width:100%}
+.mbc-ind-banner .mbc-ib-ic{font-size:2.1rem;color:var(--gold-2);margin-bottom:10px;display:block;animation:mbcUp .6s .05s both}
+.mbc-ind-banner h2{color:#fff;font-size:2.4rem;max-width:760px;margin-bottom:10px;animation:mbcUp .6s .2s both}
+.mbc-ind-banner p{color:#eaf0fb;font-size:1.08rem;max-width:620px;margin-bottom:18px;animation:mbcUp .6s .35s both}
+.mbc-ind-banner .mbc-ib-cta{display:flex;gap:12px;flex-wrap:wrap;animation:mbcUp .6s .5s both}
+.mbc-ind-banner::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.12),transparent 60%)}
+@media(max-width:900px){.mbc-ind-banner h2{font-size:1.8rem}.mbc-ind-banner{padding:42px 0}}
+
+/* ----------------------------------------------------------------------
+   Scroll reveal (subtle) + smoothing
+   ---------------------------------------------------------------------- */
+.mbc-reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+.mbc-reveal.mbc-in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .mbc-reveal{opacity:1;transform:none;transition:none}
+  .mbc-slide,.mbc-slide *{animation:none!important}
+}
+
+/* =====================================================================
+   HEADER ALIGNMENT FIX (v2.1) — prevents logo/tagline ↔ menu overlap
+   Loaded last; overrides the earlier header rules in this file.
+   ===================================================================== */
+header.site .nav{max-width:1320px;gap:28px;flex-wrap:nowrap;align-items:center}
+/* brand: LOGO on top, TAGLINE directly below; wider logo zone, never shrinks,
+   guaranteed ≥40px gap to first menu item */
+header.site .brand{
+  flex:0 0 auto;flex-direction:column;align-items:flex-start;
+  gap:5px;padding-right:34px;min-width:196px   /* wider logo container; ≥30px before Home */
+}
+header.site .brand img{height:52px;width:auto;border-radius:6px;display:block}
+header.site.mbc-scrolled .brand img{height:42px}
+/* tagline: smaller, sits directly under the logo */
+header.site .brand .tag{
+  font-size:.6rem;line-height:1.28;letter-spacing:.6px;font-weight:700;
+  color:var(--muted);white-space:normal;display:block;text-align:left;margin:0
+}
+/* nav fills remaining space, aligns right, items vertically centred */
+header.site nav{flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end}
+header.site nav .lvl1{align-items:center}
+@media(min-width:1025px){
+  header.site nav .lvl1{flex-wrap:nowrap;white-space:nowrap;gap:2px}
+  header.site nav a.navlink{padding:10px 9px;font-size:.9rem}
+  header.site .navcta{flex:0 0 auto;align-items:center;gap:10px;margin-left:10px}
+}
+/* header social icons only when there is genuine room */
+@media(max-width:1300px){header.site .mbc-social-header{display:none}}
+/* narrow-desktop band (1025–1300): tighten so the menu stays one line, hide Call */
+@media(min-width:1025px) and (max-width:1300px){
+  header.site nav a.navlink{padding:9px 7px;font-size:.85rem}
+  header.site .navcta .btn-ghost{display:none}
+  header.site .nav{gap:16px}
+  header.site .brand{padding-right:18px}
+}
+
+/* =====================================================================
+   HERO SLIDE 1 — PORTRAIT (v3): text LEFT, full uncropped photo RIGHT
+   ===================================================================== */
+.mbc-slide.has-portrait .mbc-inner.mbc-split{
+  display:grid;grid-template-columns:1.04fr .96fr;gap:34px;align-items:center;width:100%
+}
+.mbc-slide .mbc-col-text{min-width:0}
+.mbc-slide .mbc-col-img{display:flex;justify-content:flex-end;align-items:center}
+/* contain = whole face/shoulders visible, never cropped */
+.mbc-portrait{
+  max-height:430px;width:auto;max-width:100%;object-fit:contain;
+  border-radius:18px;box-shadow:0 22px 55px rgba(0,0,0,.38);
+  background:rgba(255,255,255,.04)
+}
+.mbc-slide.has-portrait.active .mbc-col-img{animation:mbcUp .6s .35s both}
+.mbc-slider{min-height:560px}
+
+/* TABLET */
+@media(min-width:769px) and (max-width:1024px){
+  .mbc-slide.has-portrait .mbc-inner.mbc-split{grid-template-columns:1fr .9fr;gap:22px}
+  .mbc-portrait{max-height:360px}
+  .mbc-slider{min-height:520px}
+}
+/* MOBILE: stack — text on top, full photo below (still uncropped) */
+@media(max-width:768px){
+  .mbc-slider{min-height:0}
+  .mbc-slide{position:absolute;inset:0}
+  .mbc-slide.has-portrait .mbc-inner.mbc-split{
+    grid-template-columns:1fr;gap:18px;text-align:left
+  }
+  .mbc-slide .mbc-col-img{justify-content:center}
+  .mbc-portrait{max-height:230px;border-radius:14px}
+  .mbc-slider{min-height:600px}
+  .mbc-slide h1,.mbc-slide h2{font-size:1.7rem}
+  .mbc-slide p{font-size:.98rem;margin-bottom:16px}
+}
+
+/* =====================================================================
+   HOMEPAGE HERO SLIDER (v6) — full-width photographic backgrounds
+   Each .mbc-bg gets its image inline; overlay (.mbc-ov) is per-slide.
+   ===================================================================== */
+.mbc-slider{min-height:580px;position:relative;overflow:hidden}
+.mbc-slide{position:absolute;inset:0;display:flex;align-items:center}
+.mbc-slide .mbc-bg{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+.mbc-slide.active .mbc-bg{animation:mbcKen 9s ease forwards}
+.mbc-slide .mbc-ov{position:absolute;inset:0;z-index:1}
+.mbc-slide .mbc-inner{
+  position:relative;z-index:2;text-align:left;
+  max-width:1140px;margin:0 auto;padding:0 24px;width:100%
+}
+.mbc-slide .mbc-inner .mbc-ey{margin-bottom:14px}
+.mbc-slide .mbc-inner h1,.mbc-slide .mbc-inner h2{max-width:640px}
+.mbc-slide .mbc-inner p{max-width:560px}
+.mbc-slide .mbc-cta{justify-content:flex-start}
+/* TABLET */
+@media(min-width:769px) and (max-width:1024px){
+  .mbc-slider{min-height:500px}
+  .mbc-slide .mbc-inner h1,.mbc-slide .mbc-inner h2{font-size:2.2rem}
+}
+/* MOBILE */
+@media(max-width:768px){
+  .mbc-slider{min-height:470px}
+  .mbc-slide .mbc-inner h1,.mbc-slide .mbc-inner h2{font-size:1.7rem;max-width:none}
+  .mbc-slide .mbc-inner p{font-size:.98rem;max-width:none}
+  .mbc-arrow{width:36px;height:36px}
+}
+
+/* v6.1 — lighter overlays (≈30–35%), keep text crisp with shadow */
+.mbc-slide .mbc-inner .mbc-ey{text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.mbc-slide .mbc-inner h1,.mbc-slide .mbc-inner h2{text-shadow:0 2px 12px rgba(0,0,0,.55)}
+.mbc-slide .mbc-inner p{text-shadow:0 1px 8px rgba(0,0,0,.5)}
+
+/* =====================================================================
+   v8 — FINAL PREMIUM POLISH (loaded last; overrides earlier rules)
+   ===================================================================== */
+/* 1) slightly shorter logo area */
+header.site .brand img{height:46px}
+header.site.mbc-scrolled .brand img{height:38px}
+header.site .brand{gap:4px}
+
+/* 2+3) menu typography, spacing & smooth hover animation */
+@media(min-width:1025px){
+  header.site nav .lvl1{gap:4px}
+  header.site nav a.navlink{
+    font-size:.92rem;letter-spacing:.3px;padding:10px 13px;
+    transition:color .2s ease, transform .22s cubic-bezier(.4,0,.2,1);
+  }
+  header.site nav a.navlink:hover{transform:translateY(-2px)}
+  header.site nav a.navlink:active{transform:translateY(0)}
+}
+/* gold underline grows a touch smoother on every item */
+nav a.navlink::after{transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+
+/* 4) subtle, slow zoom on hero images (was a stronger 1.06→1.14) */
+@keyframes mbcKen{from{transform:scale(1.02)}to{transform:scale(1.08)}}
+.mbc-slide .mbc-bg{transform:scale(1.02);will-change:transform}
+.mbc-slide.active .mbc-bg{animation:mbcKen 12s ease-out forwards}
+
+/* =====================================================================
+   v9 — HEADER WIDTH FIX + DEDICATED SLIDE-1 LAYOUT (loaded last)
+   ===================================================================== */
+/* HEADER: reduce logo container ~27%, keep clean spacing & vertical centring */
+header.site .nav{gap:24px;align-items:center}
+header.site .brand{min-width:142px;padding-right:20px}   /* was 196 + 34 */
+header.site .brand img{height:44px}
+header.site.mbc-scrolled .brand img{height:36px}
+@media(min-width:1025px){
+  header.site nav{justify-content:flex-end}
+  header.site nav .lvl1{align-items:center}
+  header.site nav a.navlink:first-child{margin-left:6px}  /* clear start after logo */
+}
+
+/* SLIDE 1 — dedicated split: full uncropped founder photo RIGHT, text LEFT 40% */
+.mbc-slide-portrait .mbc-bg-blur{
+  background-size:cover;background-position:center;
+  filter:blur(22px) brightness(.5);transform:scale(1.18)
+}
+.mbc-slide-portrait .mbc-inner.mbc-portrait-grid{
+  display:grid;grid-template-columns:40% 60%;align-items:center;gap:0;
+  height:100%;max-width:1200px
+}
+.mbc-portrait-grid .mbc-ptext{padding-right:24px}
+.mbc-portrait-grid .mbc-pimg{height:100%;display:flex;align-items:flex-end;justify-content:flex-end}
+.mbc-portrait-grid .mbc-pimg img{
+  max-height:96%;width:auto;max-width:100%;object-fit:contain;object-position:bottom right;
+  filter:drop-shadow(0 16px 40px rgba(0,0,0,.45))
+}
+/* TABLET */
+@media(min-width:769px) and (max-width:1024px){
+  .mbc-slide-portrait .mbc-inner.mbc-portrait-grid{grid-template-columns:44% 56%}
+  .mbc-portrait-grid .mbc-pimg img{max-height:84%}
+}
+/* MOBILE — stack: text on top, complete photo below (still uncropped) */
+@media(max-width:768px){
+  .mbc-slide-portrait .mbc-inner.mbc-portrait-grid{grid-template-columns:1fr;gap:12px;align-content:center}
+  .mbc-portrait-grid .mbc-ptext{padding-right:0}
+  .mbc-portrait-grid .mbc-pimg{justify-content:center;height:auto}
+  .mbc-portrait-grid .mbc-pimg img{max-height:220px}
+  .mbc-slider{min-height:600px}
+}
+
+/* v11 — a touch more breathing room between logo and the first menu item */
+@media(min-width:1025px){
+  header.site .brand{padding-right:26px}
+  header.site nav a.navlink:first-child{margin-left:16px}
+}
+
+/* =====================================================================
+   v13 — ABOUT founder image polish (navy + gold MBC branding)
+   ===================================================================== */
+.hero .wrap{align-items:center}                 /* vertical-align image & text */
+.hero img.shot.mbc-founder{
+  width:100%;max-width:560px;                    /* slightly larger */
+  border-radius:18px;
+  border:3px solid rgba(184,134,11,.35);         /* subtle gold ring */
+  box-shadow:0 22px 55px rgba(31,56,100,.30);    /* deeper navy shadow */
+}
+@media(max-width:900px){
+  .hero img.shot.mbc-founder{max-width:100%;margin-top:6px}
+}
+
+/* =====================================================================
+   v15 — GOLDEN tagline + extra logo clearance (no overlap)
+   ===================================================================== */
+header.site .brand .tag{color:var(--gold)!important}      /* SMART BUYING, SMARTER BUSINESS → gold */
+header.site .brand{min-width:166px;padding-right:30px}    /* a bit wider + clear gap */
+@media(min-width:1025px){
+  header.site nav a.navlink:first-child{margin-left:24px} /* push first menu item further from logo */
+}
+
+/* =====================================================================
+   v16 — smaller logo so it never covers the first menu item
+   ===================================================================== */
+header.site .brand img{height:38px}
+header.site.mbc-scrolled .brand img{height:32px}
+header.site .brand{min-width:150px;padding-right:28px}
+
+/* =====================================================================
+   v17 — DEFINITIVE header layout: brand locked left, menu pushed right
+   (fixes 'Home' overlapping the logo/tagline)
+   ===================================================================== */
+@media(min-width:1025px){
+  header.site .nav{display:flex;align-items:center;gap:24px;justify-content:flex-start;flex-wrap:nowrap}
+  header.site .brand{flex:0 0 auto;min-width:0;padding-right:0}     /* brand only as wide as its content */
+  header.site nav{flex:1 1 auto;min-width:0;display:flex;justify-content:flex-end;margin-left:24px}
+  header.site nav .lvl1{flex-wrap:nowrap;gap:2px;justify-content:flex-end;margin:0}
+  header.site nav a.navlink{margin-left:0!important}                /* undo buggy per-item margin */
+  header.site nav a.navlink:first-child{margin-left:0!important}
+  header.site .navcta{flex:0 0 auto;margin-left:8px}
+}
+
+/* =====================================================================
+   v18 — SLIDE 1 premium refinements (slide 1 only; slides 2-5 untouched)
+   ===================================================================== */
+.mbc-slide-portrait .mbc-bg-blur{filter:blur(22px) brightness(.58)}      /* #3 less dark behind founder */
+@media(min-width:1025px){
+  .mbc-slider{min-height:780px}                                          /* #7 premium hero height */
+  .mbc-slide-portrait .mbc-inner.mbc-portrait-grid{
+    grid-template-columns:37% 63%;gap:22px;max-width:1280px;             /* #6 left ~37%; #1 bigger image */
+  }
+  .mbc-portrait-grid .mbc-pimg{justify-content:flex-end}
+  .mbc-portrait-grid .mbc-pimg img{
+    max-height:104%;transform:translateX(28px);                          /* #1 +~12% size, #2 shift right */
+    filter:brightness(1.06) contrast(1.02);                              /* #3 brighter face */
+  }
+}
+@media(min-width:769px) and (max-width:1024px){
+  .mbc-slider{min-height:600px}                                          /* tablet */
+  .mbc-slide-portrait .mbc-inner.mbc-portrait-grid{grid-template-columns:42% 58%;gap:16px}
+  .mbc-portrait-grid .mbc-pimg img{transform:none;max-height:90%;filter:brightness(1.05)}
+}
+@media(max-width:768px){
+  .mbc-portrait-grid .mbc-pimg img{transform:none;filter:brightness(1.05)}  /* mobile: no shift */
+}
+
+/* =====================================================================
+   v19 — SLIDE 1 as ONE premium banner (founder large right, clean dark left)
+   Founder photo cover-cropped (window removed naturally); left edge blends to navy.
+   ===================================================================== */
+.mbc-slide-hero{background:#16294a;position:absolute;inset:0;overflow:hidden}
+.mbc-slide-hero .mbc-hero-photo{
+  position:absolute;top:0;right:0;height:100%;width:64%;
+  object-fit:cover;object-position:95% 42%;z-index:0;             /* founder large, full head→desk; sides cropped */
+}
+.mbc-slide-hero .mbc-hero-ov{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,#16294a 0%,#16294a 34%,rgba(20,36,66,.92) 42%,rgba(20,36,66,.45) 56%,rgba(20,36,66,.12) 70%,rgba(20,36,66,0) 84%);
+}
+.mbc-slide-hero .mbc-inner.mbc-hero-inner{
+  position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:0 24px;width:100%;
+  height:100%;display:flex;align-items:center
+}
+.mbc-slide-hero .mbc-ptext{max-width:40%}                          /* left 40% clean for text */
+.mbc-slide-hero.active .mbc-hero-photo{animation:mbcKen 14s ease-out forwards}
+
+/* TABLET */
+@media(min-width:769px) and (max-width:1024px){
+  .mbc-slider{min-height:600px}
+  .mbc-slide-hero .mbc-hero-photo{width:62%;object-position:88% 42%}
+  .mbc-slide-hero .mbc-ptext{max-width:48%}
+}
+/* MOBILE — stack: text on navy (top), founder full-width below */
+@media(max-width:768px){
+  .mbc-slider{min-height:600px}
+  .mbc-slide-hero{display:flex;flex-direction:column}
+  .mbc-slide-hero .mbc-hero-ov{display:none}
+  .mbc-slide-hero .mbc-inner.mbc-hero-inner{position:relative;order:1;height:auto;display:block;padding:30px 22px 16px}
+  .mbc-slide-hero .mbc-ptext{max-width:100%}
+  .mbc-slide-hero .mbc-hero-photo{position:relative;order:2;width:100%;height:300px;object-position:74% 20%}
+}
