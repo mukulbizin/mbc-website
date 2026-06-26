@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Area (MBC) | Marketplace Control</title>
+<meta name="description" content="MBC admin area — approve products, services and suppliers, manage inquiries, and track savings and MBC fees. Internal control panel.">
+<link rel="canonical" href="https://www.mukulbiz.in/marketplace/admin/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Admin Area (MBC) | Marketplace Control">
+<meta property="og:description" content="MBC admin area — approve products, services and suppliers, manage inquiries, and track savings and MBC fees. Internal control panel.">
+<meta property="og:url" content="https://www.mukulbiz.in/marketplace/admin/">
+<meta property="og:image" content="https://www.mukulbiz.in/assets/hero/slide1-business.jpg">
+<link rel="stylesheet" href="assets/style.css">
+<!-- Analytics (P0): paste your GA4 + Search Console tags here
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<script src="assets/data.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+  {"@type":"ProfessionalService","@id":"https://www.mukulbiz.in/#org","name":"Mukul Business Consultancy","image":"https://www.mukulbiz.in/assets/mbc-logo.jpg","email":"mukulbizin@gmail.com","telephone":"+91 79085 09146","priceRange":"₹₹","areaServed":"India","address":{"@type":"PostalAddress","addressLocality":"Kolkata","addressRegion":"West Bengal","addressCountry":"IN"},"slogan":"Smart Buying, Smarter Business","founder":{"@type":"Person","name":"Md Asfaqul Alam (Mukul)"},"sameAs":["https://www.facebook.com/share/1FxhtQv2ao/"]},
+  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.mukulbiz.in/"},{"@type":"ListItem","position":2,"name":"Marketplace","item":"https://www.mukulbiz.in/marketplace/"},{"@type":"ListItem","position":3,"name":"Admin","item":"https://www.mukulbiz.in/marketplace/admin/"}]}
+]}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="assets/premium.css">
+<script src="assets/premium.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/mbc-logo.jpg" alt="Mukul Business Consultancy logo" width="480" height="148" decoding="async" class="mbc-logo">
+      <span class="tag">SMART BUYING,<br>SMARTER BUSINESS</span>
+    </a>
+    <button class="hamb" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">☰</button>
+    <nav>
+      <ul class="lvl1" id="m">
+        <li><a class="navlink" href="index.html">Home</a></li>
+        <li><a class="navlink" href="services.html">Services ▾</a>
+          <div class="dd">
+            <a href="services.html">Services Overview</a>
+            <a href="business-consulting.html">Business Consulting</a>
+            <a href="procurement.html">Procurement Consulting</a>
+            <a href="ai-automation.html">AI Automation Consulting</a>
+            <a href="sales-marketing.html">Sales &amp; Marketing Consulting</a>
+            <a href="market-research.html">Market Research Consulting</a>
+            <a href="financial-modelling.html">Financial Modelling &amp; Feasibility</a>
+          </div>
+        </li>
+        <li><a class="navlink" href="manufacturing.html">Industries ▾</a>
+          <div class="dd">
+            <a href="manufacturing.html">Manufacturing (PVC / uPVC)</a>
+            <a href="agriculture.html">Agriculture &amp; Agri-Business</a>
+            <a href="electronics.html">Electronics &amp; Mobile</a>
+            <a href="plumbing.html">Plumbing &amp; Sanitary</a>
+            <a href="healthcare.html">Healthcare</a>
+            <a href="edtech.html">EdTech</a>
+            <a href="dry-fruits.html">Dry Fruits &amp; Food Trading</a>
+          </div>
+        </li>
+        <li><a class="navlink" href="marketplace.html" style="background:var(--soft)">Procurement Network ▾</a>
+          <div class="dd">
+            <a href="for-buyers.html">For Buyers</a>
+            <a href="for-suppliers.html">For Suppliers</a>
+            <a href="procurement-process.html">MBC Procurement Process</a>
+            <a href="marketplace-buyer.html">Buyer Portal</a>
+            <a href="marketplace-register.html">Supplier Registration</a>
+            <a href="products.html">Products Catalogue</a>
+            <a href="services-marketplace.html">Services Catalogue</a>
+            <a href="featured-suppliers.html">Supplier Network</a>
+            <a href="procurement-request.html">Procurement Request</a>
+            <a href="savings-calculator.html">Savings Calculator</a>
+            <a href="marketplace-faq.html">FAQ</a>
+            <a href="contact.html">Contact MBC</a>
+            <a href="supplier-dashboard.html">Supplier Area</a>
+            <a href="buyer-dashboard.html">Buyer Area</a>
+            <a href="admin.html">Admin (MBC)</a>
+          </div>
+        </li>
+        <li><a class="navlink" href="ai-automation.html">AI &amp; Automation</a></li>
+        <li><a class="navlink" href="about.html">About</a></li>
+        <li><a class="navlink" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="navcta">
+      <a class="btn btn-ghost" href="tel:+917908509146">Call</a>
+      <a class="btn btn-green" href="https://wa.me/919733329822?text=Hi%20Mukul%2C%20I%20found%20you%20on%20mukulbiz.in.%20I%20want%20to%20discuss%20my%20business.">Free Consultation</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="container"><div class="crumb"><a href="index.html">Home</a> › <a href="marketplace.html">Marketplace</a> › Admin (MBC)</div></div><section style="padding-top:26px"><div class="container">
+    <div class="adminbar">🔐 <b>MBC staff only (demo).</b> In production this is a secure, role-restricted admin panel backed by the database and an authentication layer. Approvals here update listing status; buyer and supplier private data stays server-side.</div>
+    <div class="kpi" id="kpi"></div>
+    <div class="dash-tabs">
+      <div class="dash-tab active" data-p="ap">Approve Products</div>
+      <div class="dash-tab" data-p="as">Approve Services</div>
+      <div class="dash-tab" data-p="asu">Approve Suppliers</div>
+      <div class="dash-tab" data-p="inq">Inquiries</div>
+      <div class="dash-tab" data-p="sf">Savings &amp; Fees</div>
+      <div class="dash-tab" data-p="add">Add Records</div>
+    </div>
+    <div class="panel active" id="p-ap"><div id="ap"></div></div>
+    <div class="panel" id="p-as"><div id="as"></div></div>
+    <div class="panel" id="p-asu"><div id="asu"></div></div>
+    <div class="panel" id="p-inq"><div id="inq"></div></div>
+    <div class="panel" id="p-sf"><div id="sf"></div></div>
+    <div class="panel" id="p-add">
+      <div class="mp-banner">Admin upload (demo). Records save as <b>Pending approval</b> in this browser. In production this writes to the database and supports <b>unlimited records</b>, image uploads and catalogue PDFs. Supplier contact details are stored privately (MBC-only) and never shown to buyers.</div>
+      <div class="grid g3">
+        <div class="card"><h3>Add supplier</h3>
+          <form id="asf"><input class="input" name="name" placeholder="Company name" required><input class="input" name="ind" placeholder="Industry / category"><input class="input" name="loc" placeholder="Location"><input class="input" name="cert" placeholder="Certifications (comma-separated)"><input class="input" name="contact" placeholder="Contact — private, MBC only"><label style="font-size:.8rem;color:var(--muted)">Catalogue PDF</label><input class="input" type="file" name="pdf" accept="application/pdf"><button class="btn btn-green" type="submit">Save supplier (pending)</button></form></div>
+        <div class="card"><h3>Add product</h3>
+          <form id="apf"><input class="input" name="name" placeholder="Product name" required><input class="input" name="cat" placeholder="Category"><input class="input" name="sup" placeholder="Supplier ID (e.g. MP-S-1001)"><input class="input" name="moq" placeholder="MOQ"><input class="input" name="area" placeholder="Delivery area"><textarea class="input" name="desc" rows="2" placeholder="Description"></textarea><label style="font-size:.8rem;color:var(--muted)">Product image</label><input class="input" type="file" name="img" accept="image/*"><button class="btn btn-green" type="submit">Save product (pending)</button></form></div>
+        <div class="card"><h3>Add service</h3>
+          <form id="asvf"><input class="input" name="name" placeholder="Service name" required><input class="input" name="ind" placeholder="Industry"><input class="input" name="cov" placeholder="Coverage area"><input class="input" name="sup" placeholder="Supplier ID"><textarea class="input" name="desc" rows="2" placeholder="Description"></textarea><button class="btn btn-green" type="submit">Save service (pending)</button></form></div>
+      </div>
+      <h3 style="margin-top:20px">Recently added (pending approval)</h3><div id="pendlist"></div>
+    </div>
+  </div></section>
+  <script>
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.dash-tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('.dash-tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active')});t.classList.add('active');document.getElementById('p-'+t.getAttribute('data-p')).classList.add('active');};});
+    function st(item){var o={};try{o=JSON.parse(localStorage.getItem('mbc_admin_status'))||{}}catch(e){}return o[item.id]||item.status;}
+    function setSt(id,v){MBCStore.setMap('admin_status',id,v);render();}
+    window.setSt=setSt;
+    function row(x,label){var s=st(x);var badge=s==='approved'?'b-ok':(s==='rejected'?'b-rej':'b-pend');return '<div class="card" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px"><div><b>'+esc(x.name)+'</b> <span class="badge '+badge+'">'+s+'</span><div style="font-size:.83rem;color:var(--muted)">'+esc(label)+'</div></div><div style="display:flex;gap:6px"><button class="save" onclick="setSt(\''+x.id+'\',\'approved\')">Approve</button><button class="save" onclick="setSt(\''+x.id+'\',\'rejected\')">Reject</button></div></div>';}
+    function render(){
+      document.getElementById('ap').innerHTML=MBC_DATA.products.map(function(p){return row(p,p.category+' · MOQ '+p.moq);}).join('');
+      document.getElementById('as').innerHTML=MBC_DATA.services.map(function(s){return row(s,s.industry+' · '+s.coverage);}).join('');
+      document.getElementById('asu').innerHTML=MBC_DATA.suppliers.map(function(s){return '<div class="card" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center"><div><b>'+esc(s.name)+'</b> <span class="badge b-ver">✔ Verified</span><div style="font-size:.83rem;color:var(--muted)">'+esc(s.category)+' · '+esc(s.location)+'</div></div><button class="save on">Verified</button></div>';}).join('');
+      var iq=MBCStore.get('inquiries');
+      document.getElementById('inq').innerHTML='<div class="adminbar" style="background:#eef6f0;color:#1e7a3d">All enquiries route through MBC. Buyer and supplier contact details are kept private.</div>'+(iq.length?iq.map(function(x){return '<div class="card" style="margin-bottom:8px"><b>'+esc((x.type||'enquiry').toUpperCase())+'</b> — '+esc(x.item||'')+' · from '+esc(x.name||'buyer (private)')+(x.qty?' · qty '+esc(x.qty):'')+'</div>';}).join(''):'<p style="color:var(--muted)">No inquiries logged in this browser yet. (Live enquiries arrive in MBC\'s inbox / WhatsApp.)</p>');
+      var deals=[{b:'Buyer A (private)',c:'PVC resin',sav:420000,fee:20},{b:'Buyer B (private)',c:'Mobile accessories',sav:180000,fee:18},{b:'Buyer C (private)',c:'Packaging',sav:95000,fee:20}];
+      var tot=0,totf=0;var rows=deals.map(function(d){var f=d.sav*d.fee/100;tot+=d.sav;totf+=f;return '<tr><td>'+d.b+'</td><td>'+d.c+'</td><td>₹'+d.sav.toLocaleString('en-IN')+'</td><td>'+d.fee+'%</td><td>₹'+Math.round(f).toLocaleString('en-IN')+'</td></tr>';}).join('');
+      document.getElementById('sf').innerHTML='<table class="tbl"><thead><tr><th>Buyer</th><th>Category</th><th>Savings delivered</th><th>Fee %</th><th>MBC fee</th></tr></thead><tbody>'+rows+'<tr><td colspan="2"><b>Total</b></td><td><b>₹'+tot.toLocaleString('en-IN')+'</b></td><td></td><td><b>₹'+Math.round(totf).toLocaleString('en-IN')+'</b></td></tr></tbody></table><p style="font-size:.8rem;color:var(--muted);margin-top:8px">Sample savings &amp; success-fee tracking. Connects to the deals database in production.</p>';
+      var pend=MBCStore.get('supplier_uploads').filter(function(u){return u.status!=='Approved';}).length;
+      document.getElementById('kpi').innerHTML='<div class="k"><b>'+pend+'</b><span>Pending supplier uploads</span></div><div class="k"><b>'+MBC_DATA.products.length+'</b><span>Products</span></div><div class="k"><b>'+MBC_DATA.services.length+'</b><span>Services</span></div><div class="k"><b>₹'+Math.round(totf).toLocaleString('en-IN')+'</b><span>MBC fees (sample)</span></div>';
+    }
+    function renderPending(){var su=MBCStore.get('admin_new_suppliers'),pr=MBCStore.get('admin_new_products'),sv=MBCStore.get('admin_new_services');var all=su.map(function(x){return ['Supplier',x.name];}).concat(pr.map(function(x){return ['Product',x.name];})).concat(sv.map(function(x){return ['Service',x.name];}));document.getElementById('pendlist').innerHTML=all.length?all.map(function(a){return '<div class="card" style="margin-bottom:8px"><b>'+esc(a[1])+'</b> <span class="badge b-pend">Pending approval</span> <span style="color:var(--muted);font-size:.83rem">'+a[0]+'</span></div>';}).join(''):'<p style="color:var(--muted)">Nothing pending. Add a supplier, product or service above.</p>';}
+    document.getElementById('asf').onsubmit=function(e){e.preventDefault();var f=this;MBCStore.push('admin_new_suppliers',{name:f.name.value,industry:f.ind.value,location:f.loc.value,certifications:f.cert.value,contactPrivate:f.contact.value,cataloguePdf:(f.pdf.files[0]&&f.pdf.files[0].name)||'',status:'Pending approval',ts:Date.now()});f.reset();renderPending();};
+    document.getElementById('apf').onsubmit=function(e){e.preventDefault();var f=this;MBCStore.push('admin_new_products',{name:f.name.value,category:f.cat.value,supplierId:f.sup.value,moq:f.moq.value,deliveryArea:f.area.value,description:f.desc.value,image:(f.img.files[0]&&f.img.files[0].name)||'',status:'Pending approval',ts:Date.now()});f.reset();renderPending();};
+    document.getElementById('asvf').onsubmit=function(e){e.preventDefault();var f=this;MBCStore.push('admin_new_services',{name:f.name.value,industry:f.ind.value,coverage:f.cov.value,supplierId:f.sup.value,description:f.desc.value,status:'Pending approval',ts:Date.now()});f.reset();renderPending();};
+    renderPending();
+    render();
+  });
+  </script></main>
+<a class="wafloat" href="https://wa.me/919733329822?text=Hi%20Mukul%2C%20I%20found%20you%20on%20mukulbiz.in.">💬 WhatsApp</a>
+<div class="mobilebar">
+  <a class="call" href="tel:+917908509146">📞 Call</a>
+  <a class="wa" href="https://wa.me/919733329822?text=Hi%20Mukul%2C%20I%20found%20you%20on%20mukulbiz.in.">💬 WhatsApp</a>
+  <a href="contact.html">✉ Enquiry</a>
+</div>
+<footer class="site">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <span class="logo"><img src="assets/mbc-logo.jpg" alt="MBC logo"></span>
+        <p style="font-size:.9rem">Practical business, procurement, AI &amp; growth consulting for manufacturers, traders and SMEs. Based in Kolkata, West Bengal. Serving clients across India in English, বাংলা &amp; हिंदी.</p>
+      </div>
+      <div><h4>Services</h4><ul>
+        <li><a href="procurement.html">Procurement</a></li>
+        <li><a href="ai-automation.html">AI Automation</a></li>
+        <li><a href="sales-marketing.html">Sales &amp; Marketing</a></li>
+        <li><a href="marketplace.html">Managed Procurement Network</a></li>
+        <li><a href="lead-capture.html">Free Procurement Review</a></li>
+        <li><a href="services.html">All services</a></li>
+      </ul></div>
+      <div><h4>Industries</h4><ul>
+        <li><a href="manufacturing.html">Manufacturing / PVC</a></li>
+        <li><a href="agriculture.html">Agriculture &amp; Agri-Business</a></li>
+        <li><a href="electronics.html">Electronics &amp; Mobile</a></li>
+        <li><a href="plumbing.html">Plumbing &amp; Sanitary</a></li>
+        <li><a href="healthcare.html">Healthcare</a> · <a href="edtech.html">EdTech</a> · <a href="dry-fruits.html">Dry Fruits</a></li>
+      </ul></div>
+      <div><h4>Contact</h4><ul>
+        <li><a href="tel:+917908509146">+91 79085 09146</a></li>
+        <li><a href="https://wa.me/919733329822">WhatsApp: +91 97333 29822</a></li>
+        <li><a href="mailto:mukulbizin@gmail.com">mukulbizin@gmail.com</a></li>
+        <li>Kolkata, West Bengal, India</li>
+        <li><a href="https://www.facebook.com/share/1FxhtQv2ao/">Facebook</a></li>
+      </ul></div>
+    </div>
+    <div class="copyright" style="border-top:1px solid #2c3f63;padding-top:14px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms &amp; Conditions</a> · <a href="disclaimer.html">Disclaimer</a> · <a href="anti-circumvention.html">Anti-Circumvention</a> · <a href="supplier-agreement.html">Supplier Agreement</a> · <a href="buyer-agreement.html">Buyer Agreement</a> · <a href="success-fee-agreement.html">Success-Fee Agreement</a> · <a href="grievance.html">Grievance Officer</a></div>
+    <div class="copyright" style="border:0;padding-top:6px">© 2026 Mukul Business Consultancy. All rights reserved. “Smart Buying, Smarter Business”</div>
+  </div>
+</footer>
+<script>document.addEventListener('DOMContentLoaded',function(){if(!window.MBCStore)return;document.querySelectorAll('[data-savesup]').forEach(function(btn){var id=btn.getAttribute('data-savesup');if(MBCStore.has('saved_suppliers',id)){btn.classList.add('on');btn.textContent='★ Saved';}btn.onclick=function(){var on=MBCStore.toggle('saved_suppliers',id);btn.classList.toggle('on',on);btn.textContent=on?'★ Saved':'☆ Save';};});});</script>
+</body>
+</html>
